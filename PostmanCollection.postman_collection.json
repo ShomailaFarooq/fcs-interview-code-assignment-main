@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "ea48d571-42e5-4dff-90ec-f1fae97369a1",
+		"name": "PostmanCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "51093223",
+		"_collection_link": "https://shomailafarooq4-3504886.postman.co/workspace/shomaila's-Workspace~dd8a71b0-3a57-4a57-864f-f045e42a25ce/collection/51093223-ea48d571-42e5-4dff-90ec-f1fae97369a1?action=share&source=collection_link&creator=51093223"
+	},
+	"item": [
+		{
+			"name": "post store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"TestStore\",\r\n  \"quantityProductsInStock\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/store",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get store",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "patch store -partial update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"quantityProductsInStock\": 123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/store/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"store",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put store - full update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"UpdatedStore\",\r\n  \"quantityProductsInStock\": 99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/store/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"store",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete store",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/store/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"store",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get warehouse",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "post warehouse",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"businessUnitCode\": \"MWH.001\",\r\n  \"location\": \"AMSTERDAM-001\",\r\n  \"capacity\": 100,\r\n  \"stock\": 50\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/warehouse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"warehouse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get warehouse by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/warehouse/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"warehouse",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete warehouse",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/warehouse/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"warehouse",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "replacement warehouse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"location\": \"ZWOLLE-002\",\r\n  \"capacity\": 60,\r\n  \"stock\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/warehouse/MWH.001/replacement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"warehouse",
+						"MWH.001",
+						"replacement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "replacement-1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"location\": \"ZWOLLE-002\",\r\n  \"capacity\": 40,\r\n  \"stock\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/warehouse/MWH.001/replacement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"warehouse",
+						"MWH.001",
+						"replacement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/q/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"q",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
