@@ -1,61 +1,61 @@
 package com.fulfilment.application.monolith.warehouses.adapters.restapi;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
-
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
+
 @QuarkusIntegrationTest
-public class WarehouseEndpointIT {
+class WarehouseEndpointIT {
 
-  @Test
-  public void testSimpleListWarehouses() {
+    @Test
+    void testListWarehouses() {
+        given()
+                .when()
+                .get("/warehouse")
+                .then()
+                .statusCode(200)
+                .body(
+                        containsString("MWH.001"),
+                        containsString("MWH.012"),
+                        containsString("MWH.023")
+                );
+    }
 
-    final String path = "warehouse";
+    @Test
+    void testArchiveWarehouseFlow() {
+        // 1. Verify initial list contains all warehouses
+        given()
+                .when()
+                .get("/warehouse")
+                .then()
+                .statusCode(200)
+                .body(
+                        containsString("MWH.001"),
+                        containsString("MWH.012"),
+                        containsString("MWH.023")
+                );
 
-    // List all, should have all 3 products the database has initially:
-    given()
-        .when()
-        .get(path)
-        .then()
-        .statusCode(200)
-        .body(containsString("MWH.001"), containsString("MWH.012"), containsString("MWH.023"));
-  }
+        // 2. Archive warehouse with ID 1
+        given()
+                .when()
+                .delete("/warehouse/1")
+                .then()
+                .statusCode(204);
 
-  @Test
-  public void testSimpleCheckingArchivingWarehouses() {
-
-    // Uncomment the following lines to test the WarehouseResourceImpl implementation
-
-    // final String path = "warehouse";
-
-    // List all, should have all 3 products the database has initially:
-    // given()
-    //     .when()
-    //     .get(path)
-    //     .then()
-    //     .statusCode(200)
-    //     .body(
-    //         containsString("MWH.001"),
-    //         containsString("MWH.012"),
-    //         containsString("MWH.023"),
-    //         containsString("ZWOLLE-001"),
-    //         containsString("AMSTERDAM-001"),
-    //         containsString("TILBURG-001"));
-
-    // // Archive the ZWOLLE-001:
-    // given().when().delete(path + "/1").then().statusCode(204);
-
-    // // List all, ZWOLLE-001 should be missing now:
-    // given()
-    //     .when()
-    //     .get(path)
-    //     .then()
-    //     .statusCode(200)
-    //     .body(
-    //         not(containsString("ZWOLLE-001")),
-    //         containsString("AMSTERDAM-001"),
-    //         containsString("TILBURG-001"));
-  }
+        // 3. Verify warehouse 1 is no longer returned
+        given()
+                .when()
+                .get("/warehouse")
+                .then()
+                .statusCode(200)
+                .body(
+                        // archived warehouse should be gone
+                        org.hamcrest.Matchers.not(containsString("MWH.001")),
+                        // others should still be present
+                        containsString("MWH.012"),
+                        containsString("MWH.023")
+                );
+    }
 }
